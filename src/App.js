@@ -1,47 +1,45 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.css";
 
 const App = () => {
+  const [count, setCount] = useState(0);
+  const [count2, setCount2] = useState(0);
 
-  const [count, setCount] = useState(0)
-  const [count2, setCount2] = useState(0)
-
-  // App Effects (it's about what's happen after render)
+  // App Effects
   useEffect(() => {
-    console.log(`Effect run after eatch render`)
-  })
-
-  useEffect(() => {
-    console.log(`Effect run only once`)
-  },[])
+    console.log(`Effect will run after every render`);
+  });
 
   useEffect(() => {
-    console.log(`Effect run if _count dependencie change`)
-  },[count])
+    console.log(`Effect will run just once, after the first render`);
+  }, []);
 
   useEffect(() => {
-    console.log(`Effect run if _count OR _count2 dependencies change`)
-  },[count, count2])
+    console.log(`Effect will run only when count changes`);
+  }, [count]);
+
+  useEffect(() => {
+    console.log(`Effect will run when count OR count2 change`);
+  }, [count, count2]);
 
   // Increment counter1
   const add = () => {
-    
-    const addResult = count + 1
-    setCount(addResult)
-    console.log(`addResult counter1: ${addResult}`)
-  }
+    const result = count + 1;
+    console.log(`[add] result: ${result}`);
+    setCount(result);
+  };
 
   // Increment counter2
   const add2 = () => {
-    
-    const addResult = count2 + 1
-    setCount2(addResult)
-    console.log(`addResult counter2: ${addResult}`)
-  }
-  
+    const result = count2 + 1;
+    console.log(`[add2] result: ${result}`);
+    setCount2(result);
+  };
+
   console.log(`
-    [render App] count: ${count} | count2: ${count2}
-  `)
+    [Render] count: ${count} | count2: ${count2}
+  `);
+
   return (
     <div className="App">
       <h1>Count App</h1>
@@ -51,6 +49,6 @@ const App = () => {
       <button onClick={add2}>+</button>
     </div>
   );
-}
+};
 
-export default App
+export default App;
