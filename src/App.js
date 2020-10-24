@@ -1,27 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./styles.css";
 import Counter from "./Components/Counter";
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const [count2, setCount2] = useState(0);
+  const [count, setCount] = useState(0); // Use by App
+  const [count2, setCount2] = useState(0); // Use by Counter
 
-  // App Effects
-  useEffect(() => {
-    console.log(`Effect will run after every render`);
-  });
-
-  useEffect(() => {
-    console.log(`Effect will run just once, after the first render`);
-  }, []);
-
-  useEffect(() => {
-    console.log(`Effect will run only when count changes`);
-  }, [count]);
-
-  useEffect(() => {
-    console.log(`Effect will run when count OR count2 change`);
-  }, [count, count2]);
+  const counterId = [1, 2];
+  console.log(`counterID: ${counterId}`);
 
   // Increment counter1
   const add = () => {
@@ -43,12 +29,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Count App</h1>
-      <p>Count state: {count}</p>
-      <button onClick={add}>+</button>
-      <p>Count state: {count2}</p>
-      <button onClick={add2}>+</button>
-      <Counter />
+      {/* Counter1 */}
+      <Counter id={counterId[0]} value={count} onAdd={add} />
+      {/* Counter2 */}
+      <Counter id={counterId[1]} value={count2} onAdd={add2} />
     </div>
   );
 };
