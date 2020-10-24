@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
+import Counter from "./Components/Counter";
 
 const App = () => {
   const [count, setCount] = useState(0);
@@ -47,6 +48,7 @@ const App = () => {
       <button onClick={add}>+</button>
       <p>Count state: {count2}</p>
       <button onClick={add2}>+</button>
+      <Counter />
     </div>
   );
 };
