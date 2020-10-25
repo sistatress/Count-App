@@ -54,12 +54,26 @@ const App = () => {
     );
   };
 
+  /*  Add a new counter to the App  */
+  const handleClick = () => {
+    const counterId = counters.length + 1;
+    const defaultCounter = {
+      id: counterId,
+      value: 0
+    };
+    const newCounters = [...counters, defaultCounter];
+    setCounts(newCounters);
+  };
+
   console.log(`[Render App]`);
 
   return (
     <div className="App">
       {/* Counters */}
       {counters.map(showCounters)}
+      <br />
+      <h2>Add a counter to the screen</h2>
+      <button onClick={handleClick}>Add Counter</button>
     </div>
   );
 };
