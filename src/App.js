@@ -26,6 +26,21 @@ const App = () => {
     setCounts(newCounters);
   };
 
+  /*  Update counter value  */
+
+  const deleteCounter = (id) => {
+    // Copy of the counters array
+    const countersCopy = [...counters];
+
+    // Delete counter
+    const newCounters = countersCopy.filter(
+      (counterElement) => counterElement.id !== id
+    );
+
+    // Set counters state
+    setCounts(newCounters);
+  };
+
   /*  Increment counter  */
 
   const add = (id, value) => {
@@ -49,6 +64,7 @@ const App = () => {
           value={element.value}
           onAdd={add}
           onSubtract={subtract}
+          onDelete={deleteCounter}
         />
       </div>
     );
@@ -72,7 +88,7 @@ const App = () => {
       {/* Counters */}
       {counters.map(showCounters)}
       <br />
-      <h2>Add a counter to the screen</h2>
+      <h2>Add one counter</h2>
       <button onClick={handleClick}>Add Counter</button>
     </div>
   );

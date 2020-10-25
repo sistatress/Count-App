@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const Counter = ({ id, value, onAdd, onSubtract }) => {
+const Counter = ({ id, value, onAdd, onSubtract, onDelete }) => {
   useEffect(() => {
     console.log(`Counter Effect id ${id}`);
   }, [value, id]);
@@ -10,6 +10,8 @@ const Counter = ({ id, value, onAdd, onSubtract }) => {
       <h2>{value}</h2>
       <button onClick={() => onSubtract(id, value)}>-</button>
       <button onClick={() => onAdd(id, value)}>+</button>
+      <br />
+      <button onClick={() => onDelete(id)}>Delete Counter</button>
     </div>
   );
 };
