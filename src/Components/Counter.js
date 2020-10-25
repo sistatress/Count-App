@@ -4,7 +4,9 @@ const Counter = ({ id, value, onAdd, onSubtract, onDelete }) => {
   useEffect(() => {
     console.log(`Counter Effect id ${id}`);
   }, [value, id]);
+
   console.log(`Counter render`);
+
   return (
     <div>
       <h2>{value}</h2>
