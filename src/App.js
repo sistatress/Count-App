@@ -3,23 +3,36 @@ import "./styles.css";
 import Counter from "./Components/Counter";
 
 const App = () => {
-  const [counts, setCount] = useState({ id: 0, value: 2 }); // Use by App
+  const [counters, setCounts] = useState([{ id: 0, value: 0 },{ id: 1, value: 0 }, { id: 2, value: 0 }]); // Use by App
 
-  // Increment counter1
-  const add = (id) => {
-    const result = counts.value + 1;
-    console.log(`[add] result: ${result}`);
-    setCount({ id, value: result });
+  // Increment counter
+  const add = (id,value) => {
+    
+    const result = value + 1;
+    // Find the counter 
+    const counterIndex = counters.findIndex(counterElement => counterElement.id === id)
+    // Copy of the counters array
+    const newCounters = [...counters]
+    // Udate the counter value
+    newCounters[counterIndex] = {...newCounters[counterIndex], value:result}
+    // Set counters state
+    setCounts(newCounters)
   };
 
-  console.log(`[Render] count`);
+  const showCounts = (element, index) => {
+    //console.log(`element id: ${element.id} value: ${element.value} index: ${index}`)
+    return (
+      <div key={index}>
+        <Counter id={element.id} value={element.value} onAdd={add} />
+      </div>
+    )
+  }
+  console.log(`[Render App]`);
 
   return (
     <div className="App">
-      {/* Counter1 */}
-      <Counter id={counts.id} value={counts.value} onAdd={add} />
-      {/* Counter2 */}
-      {/* <Counter id={counterId[1]} value={count2} onAdd={add2} /> */}
+      {/* Counters */}
+      {counters.map(showCounts)}
     </div>
   );
 };
