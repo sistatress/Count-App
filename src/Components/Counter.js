@@ -7,9 +7,7 @@ const Counter = ({ id, value, onAdd, onSubtract }) => {
   console.log(`Counter render`);
   return (
     <div>
-      <h2>
-        Counter {id} : {value}
-      </h2>
+      <h2>{value}</h2>
       <button onClick={() => onSubtract(id, value)}>-</button>
       <button onClick={() => onAdd(id, value)}>+</button>
     </div>
