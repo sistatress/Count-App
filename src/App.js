@@ -1,52 +1,85 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./styles.css";
+import Counters from "./Components/Counters";
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const [count2, setCount2] = useState(0);
+  const [counters, setCounts] = useState([
+    { id: 0, value: 0 },
+    { id: 1, value: 0 },
+    { id: 2, value: 0 }
+  ]);
 
-  // App Effects
-  useEffect(() => {
-    console.log(`Effect will run after every render`);
-  });
+  /*  Update counter value  */
 
-  useEffect(() => {
-    console.log(`Effect will run just once, after the first render`);
-  }, []);
+  const updateCounter = (id, value, result) => {
+    // Find the counter
+    const counterIndex = counters.findIndex(
+      (counterElement) => counterElement.id === id
+    );
+    // Copy of the counters array
+    const newCounters = [...counters];
 
-  useEffect(() => {
-    console.log(`Effect will run only when count changes`);
-  }, [count]);
+    // Udate the counter value
+    newCounters[counterIndex] = { ...newCounters[counterIndex], value: result };
 
-  useEffect(() => {
-    console.log(`Effect will run when count OR count2 change`);
-  }, [count, count2]);
-
-  // Increment counter1
-  const add = () => {
-    const result = count + 1;
-    console.log(`[add] result: ${result}`);
-    setCount(result);
+    // Set counters state
+    setCounts(newCounters);
   };
 
-  // Increment counter2
-  const add2 = () => {
-    const result = count2 + 1;
-    console.log(`[add2] result: ${result}`);
-    setCount2(result);
+  /*  Update counter value  */
+
+  const deleteCounter = (id) => {
+    // Copy of the counters array
+    const countersCopy = [...counters];
+
+    // Delete counter
+    const newCounters = countersCopy.filter(
+      (counterElement) => counterElement.id !== id
+    );
+
+    // Set counters state
+    setCounts(newCounters);
   };
 
-  console.log(`
-    [Render] count: ${count} | count2: ${count2}
-  `);
+  /*  Increment counter  */
+
+  const add = (id, value) => {
+    const result = ++value;
+    updateCounter(id, value, result);
+  };
+
+  /*  Decrement counter  */
+
+  const subtract = (id, value) => {
+    const result = --value;
+    updateCounter(id, value, result);
+  };
+
+  /*  Add a new counter to the App  */
+  const handleClick = () => {
+    const counterId = counters.length + 1;
+    const defaultCounter = {
+      id: counterId,
+      value: 0
+    };
+    const newCounters = [...counters, defaultCounter];
+    setCounts(newCounters);
+  };
+
+  console.log(`[Render App]`);
 
   return (
     <div className="App">
-      <h1>Count App</h1>
-      <p>Count state: {count}</p>
-      <button onClick={add}>+</button>
-      <p>Count state: {count2}</p>
-      <button onClick={add2}>+</button>
+      {/* Counters */}
+      <Counters
+        countersList={counters}
+        onAdd={add}
+        onSubtract={subtract}
+        onDelete={deleteCounter}
+      />
+      <br />
+      <h2>Add one counter</h2>
+      <button onClick={handleClick}>Add Counter</button>
     </div>
   );
 };
