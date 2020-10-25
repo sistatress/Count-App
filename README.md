@@ -1,2 +1,2 @@
-# Count-App
+# Counters-App
 Created with CodeSandbox
