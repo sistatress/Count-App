@@ -10,7 +10,7 @@ const Counter = ({ id, value, onAdd }) => {
       <h2>
         Counter {id} : {value}
       </h2>
-      <button onClick={onAdd}>+</button>
+      <button onClick={() => onAdd(id)}>+</button>
     </div>
   );
 };
