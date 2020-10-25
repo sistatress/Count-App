@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./styles.css";
 import Counter from "./Components/Counter";
+import Counters from "./Components/Counters";
 
 const App = () => {
   const [counters, setCounts] = useState([
@@ -55,21 +56,6 @@ const App = () => {
     updateCounter(id, value, result);
   };
 
-  const showCounters = (element, index) => {
-    //console.log(`element id: ${element.id} value: ${element.value} index: ${index}`)
-    return (
-      <div key={index}>
-        <Counter
-          id={element.id}
-          value={element.value}
-          onAdd={add}
-          onSubtract={subtract}
-          onDelete={deleteCounter}
-        />
-      </div>
-    );
-  };
-
   /*  Add a new counter to the App  */
   const handleClick = () => {
     const counterId = counters.length + 1;
@@ -86,7 +72,12 @@ const App = () => {
   return (
     <div className="App">
       {/* Counters */}
-      {counters.map(showCounters)}
+      <Counters
+        countersList={counters}
+        onAdd={add}
+        onSubtract={subtract}
+        onDelete={deleteCounter}
+      />
       <br />
       <h2>Add one counter</h2>
       <button onClick={handleClick}>Add Counter</button>
